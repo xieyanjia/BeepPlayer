@@ -58,3 +58,8 @@
 當使用者關閉程式時，會跳出確認視窗詢問是否確定關閉，避免使用者誤按關閉按鈕。
 
 ---
+<img width="535" height="258" alt="image" src="https://github.com/user-attachments/assets/0e26ad12-f2c6-4833-baa8-473bfba2886e" />
+<img width="536" height="257" alt="image" src="https://github.com/user-attachments/assets/9401bb39-d646-40bc-9fe1-15adb54c3ae2" />
+<img width="535" height="260" alt="image" src="https://github.com/user-attachments/assets/77a42732-a095-4663-a605-d3444dfc87e9" />
+
+
