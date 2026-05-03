@@ -6,10 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace BeepPlayer
 {   
@@ -128,25 +129,35 @@ namespace BeepPlayer
         {
             string melody = cmbMelody.SelectedItem.ToString();
 
+            // 播放旋律前，先鎖住單音按鈕
+            SetNoteButtonsEnabled(false);
+
             // 播放期間先停用按鈕，避免使用者一直重複按
             btnPlayMelody.Enabled = false;
             cmbMelody.Enabled = false;
 
-            await Task.Run(() =>
+            try
             {
-                if (melody == "生日快樂歌")
+                await Task.Run(() =>
                 {
-                    PlayHappyBirthday();
-                }
-                else if (melody == "超級瑪利歐")
-                {
-                    PlayMario();
-                }
-            });
+                    if (melody == "生日快樂歌")
+                    {
+                        PlayHappyBirthday();
+                    }
+                    else if (melody == "超級瑪利歐")
+                    {
+                        PlayMario();
+                    }
+                });
+            }
+            finally
+            {
+                // 播放完成後，不管有沒有錯誤，都恢復按鈕
+                SetNoteButtonsEnabled(true);
 
-            // 播放結束後恢復按鈕
-            btnPlayMelody.Enabled = true;
-            cmbMelody.Enabled = true;
+                btnPlayMelody.Enabled = true;
+                cmbMelody.Enabled = true;
+            }
         }
 
         private void PlayHappyBirthday()
@@ -251,5 +262,16 @@ namespace BeepPlayer
             }
         }
 
+        private void SetNoteButtonsEnabled(bool enabled)
+        {
+            btn1.Enabled = enabled;
+            btn2.Enabled = enabled;
+            btn3.Enabled = enabled;
+            btn4.Enabled = enabled;
+            btn5.Enabled = enabled;
+            btn6.Enabled = enabled;
+            btn7.Enabled = enabled;
+            btn8.Enabled = enabled;
+        }
     }
 }
